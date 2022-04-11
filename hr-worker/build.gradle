@@ -35,6 +35,10 @@ dependencies {
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    //mapstruct
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
 }
 
 
@@ -43,6 +47,16 @@ application {
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.suppressGeneratorVersionInfoComment=true',
+            '-Amapstruct.verbose=true',
+            '-Amapstruct.defaultInjectionStrategy=constructor',
+            '-Amapstruct.defaultComponentModel=jsr330'
+    ]
 }
 
 tasks {
